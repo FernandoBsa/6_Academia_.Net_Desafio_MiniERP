@@ -6,6 +6,10 @@ Bem-vindo ao Mini ERP desenvolvido para a 6ª Academia de C# da UFN. Este projet
 
 - Cadastro de produtos.
 - Consulta de produtos.
+- Cadastro de Fornecedores.
+- Consulta de Fornecedores.
+- Cadastro de clientes.
+- Consulta de clientes.
 - Geração de notas fiscais.
 - Visualização de notas fiscais.
 
