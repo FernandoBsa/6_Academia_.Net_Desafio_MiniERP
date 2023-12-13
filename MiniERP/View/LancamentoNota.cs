@@ -86,7 +86,7 @@ namespace MiniERP.View
                     MessageBox.Show("Por favor, selecione um cliente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                // 1. Salvar a Nota Fiscal
+                
                 NotasFiscais novaNota = new NotasFiscais
                 {
                     ClienteId = clienteSelecionado.Id,
@@ -97,10 +97,10 @@ namespace MiniERP.View
                 contexto.NotasFiscais.Add(novaNota);
                 contexto.SaveChanges();
 
-                // 2. Obter o ID da Nota Fiscal Criada
+                
                 int notaFiscalId = novaNota.NotaFiscalId;
 
-                // 3. Salvar os Produtos Associados à Nota Fiscal
+                
                 foreach (ProdutoViewModel produtoViewModel in produtos)
                 {
                     Produtos produtoBanco = contexto.Produtos.FirstOrDefault(p => p.Nome == produtoViewModel.Nome);

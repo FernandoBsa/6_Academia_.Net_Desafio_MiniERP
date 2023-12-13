@@ -33,7 +33,7 @@ namespace MiniERP
 
                 if (string.IsNullOrWhiteSpace(consulta))
                 {
-                    //ConfigurarDataGridView();
+                    ConfigurarDataGridView();
                     CarregarDadosGrid();
                 }
                 else
