@@ -45,6 +45,7 @@ namespace MiniERP.View
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string caminhoDoPDF = saveFileDialog.FileName;
+                    Clientes cliente = contexto.Clientes.FirstOrDefault(c => c.NomeRazãoSocial == ClienteNome);
 
                     FileStream arquivoPdf = new FileStream(caminhoDoPDF, FileMode.Create);
                     Document doc = new Document(PageSize.A4);
@@ -65,7 +66,23 @@ namespace MiniERP.View
 
                     Paragraph paragrafo4 = new Paragraph(dados, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12));
                     paragrafo4.Alignment = Element.ALIGN_LEFT;
-                    paragrafo4.Add($"Nome do Cliente: {ClienteNome}");
+                    paragrafo4.Add($"Cliente: {ClienteNome}\n");
+
+                    Paragraph paragrafo45 = new Paragraph(dados, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12));
+                    paragrafo45.Alignment = Element.ALIGN_LEFT;
+                    
+                    if (cliente != null)
+                    {
+                        paragrafo45.Add($"CPF: {cliente.CpfCnpj}\n");
+                    }
+                    else
+                    {
+                        paragrafo45.Add("CPF: Não disponível\n");
+                    }
+
+                    Paragraph paragrafo46 = new Paragraph(dados, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12));
+                    paragrafo45.Alignment = Element.ALIGN_LEFT;
+                    paragrafo46.Add($"Telefone: {cliente.Telefone}\n");
 
                     Paragraph paragrafo5 = new Paragraph(dados, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 12));
                     paragrafo5.Alignment = Element.ALIGN_LEFT;
@@ -94,10 +111,13 @@ namespace MiniERP.View
                     doc.Add(paragrafo2);
                     doc.Add(paragrafo3);
                     doc.Add(paragrafo4);
+                    doc.Add(paragrafo45);
+                    doc.Add(paragrafo46);
                     doc.Add(paragrafo5);
                     doc.Add(paragrafo6);
                     doc.Add(paragrafo7);
                     doc.Add(paragrafo8);
+                    
                     doc.Close();
 
                     MessageBox.Show("Nota fiscal salva como PDF.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
